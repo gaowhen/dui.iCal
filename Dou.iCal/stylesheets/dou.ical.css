@@ -1,0 +1,22 @@
+/* dou.ical */
+.dou-ical{background-color:#fff;border:1px solid #ccc;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;position:absolute;width:164px;}
+.dou-ical .dou-ical-hd{height:30px;line-height:35px;position:relative;}
+.dou-ical .dou-ical-hd a{background:url(../images/schedule.gif) no-repeat;height:30px;position:absolute;overflow:hidden;width:10px;cursor:pointer;display:block;text-indent:-9999px;}
+.dou-ical .dou-ical-hd .dou-btn-prev{background-position:-5px 0;left:15px;}
+.dou-ical .dou-ical-hd .dou-btn-next{background-position:-20px 0;right:15px;}
+.dou-ical .dou-ical-hd .dou-ical-title{color:#666;font-weight:bold;text-align:center;}
+
+.dou-ical-bd{padding:10px;}
+.dou-ical-bd table{color:#666;width:100%;border-collapse:collapse;boder-spacing:0;}
+.dou-ical-bd thead{background-color:#eee;}
+.dou-ical-bd th{border:1px solid #e;text-align:center;}
+.dou-ical-bd td{border:1px solid #eee;text-align:center;}
+.dou-ical-bd .on{background-color:#ccc;}
+.dou-ical-bd .today{background-color:#888;}
+.dou-ical-bd .cursor{cursor:pointer;}
+
+/* other */
+.wrap{padding:30px 0 0 30px;}
+h1{margin-bottom:30px;}
+.ical{margin-bottom:20px;}
+.normal{height:230px;}

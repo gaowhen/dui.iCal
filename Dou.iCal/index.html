@@ -1,0 +1,98 @@
+<!doctype>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="script/do.min.js"></script>
+	<script type="text/javascript">
+		Do.add('base-css', {path: 'stylesheets/base.css', type: 'css'});
+		Do.add('layout-css', {path: 'stylesheets/layout.css', type: 'css'});
+		Do.add('skeleton-css', {path: 'stylesheets/skeleton.css', type: 'css'});
+		Do.add('dou-ical-css', {path: 'stylesheets/dou.ical.css', type: 'css'});
+		Do.add('tmpl', {path: 'script/jquery.tmpl.min.js', type: 'js'});
+		Do.add('date-format', {path: 'script/date.format.js', type: 'js'});
+		Do.add('dou-ical', {path: 'script/dou.ical.js', type: 'js', requires:['tmpl', 'date-format', 'base-css', 'layout-css', 'skeleton-css', 'dou-ical-css']});
+	</script>
+	<title>dou.ical</title>
+</head>
+<body>
+
+	<script id="dou-ical-templ" type="text/x-jquery-tmpl">
+		<div class="dou-ical" id="{{= context}}">
+			<div class="dou-ical-hd">
+				<a href="#" class="dou-btn-prev">上月</a>
+				<a href="#" class="dou-btn-next">下月</a>
+				<div class="dou-ical-title">
+					<span class="month">{{= month}}</span>
+					<span class="year">{{= year}}</span>
+				</div>
+			</div>
+			<div class="dou-ical-bd">
+				<table>
+					<thead>
+						<tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>
+					</thead>
+					<tbody>
+						<tr>
+						{{each(i, day) days}}
+							{{if (i + 1) % 7 === 0}}
+							<td>{{= day}}</td></tr><tr>
+							{{else}}
+							<td>{{= day}}</td>
+							{{/if}}
+						{{/each}}
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</script>
+
+	<div class="wrap column">
+
+		<h1>Dou.iCal</h1>
+
+		<div class="container">
+			<div class="intro">
+				<h4>简单的日历一枚</h4>
+				<h5>其中用到了：</h5>
+				<ul>
+					<li><a href="http://kejun.github.com/Do/">Do</a></li>
+					<li><a href="http://plugins.jquery.com/project/jquerytemplate">JQUERY TEMPLATES</a></li>
+					<li><a href="http://www.getskeleton.com/">Skeleton</a></li>
+				</ul>
+			</div>
+
+			<div class="ical normal columns five">
+				<h3>Demo 1</h3>
+				<script type="text/javascript">
+					// 测试用户自定义函数
+					function test(){
+						$.each($('div#dou-ical-normal td'), function(i, v){
+							dou.log($(v).data('date'));
+						});
+					}
+
+					Do('dou-ical', function(){
+							dou.ical.init({type: 'normal', ele: $('div.normal'), context: 'dou-ical-normal', callback: test});
+					});
+				</script>
+			</div>
+
+			<div class="ical popup columns five">
+				<h3>Demo 2</h3>
+				<a class="icalPop"href="#">Click Me</a>
+			</div><!--calendar-->
+			<script type="text/javascript">
+				Do('dou-ical', function(){
+					$('a.icalPop').bind('click', function(){
+						dou.ical.init({type: 'popup', ele: $(this), context: 'dou-ical-popup'})
+						return false;
+					});
+				});
+			</script>
+		</div>
+
+	</div>
+
+</body>
+</html>
