@@ -45,11 +45,17 @@ dou.ical = (function() {
 		// 如果当月的第一天是周五或者周六
 		// 则日历视图有42天
 		// 否则日历视图有35天
-		thisMonthLength = firstDay === 5 || firstDay === 6 ? 42: 35,
+		// 单从当月第一天是周五、周六来判断
+		// 是多么简单粗暴的弱智做法啊
+		// thisMonthLength = firstDay === 5 || firstDay === 6 ? 42: 35,
+		// 日历第一行中，当月的日期所占的天数
+		firstRowDays = firstDay === 7 ? 7: 7-firstDay,
+		daysLeft = monthLength - firstRowDays,
+		calViewLength =  (Math.ceil(daysLeft / 7) + 1) * 7,
 		prevMonthLength = _getMonthLength(year, month - 1);
 
 		// 前一个月
-		for (var i = firstDay; i > 0; i--) {
+		for (var i = firstDay - 1; i >= 0; i--) {
 			days.push(prevMonthLength - i);
 		};
 		// 当前月
@@ -57,7 +63,7 @@ dou.ical = (function() {
 			days.push(i);
 		}
 		// 下一个月
-		for (var i = 1; i <= thisMonthLength - monthLength - firstDay; i++) {
+		for (var i = 1; i <= calViewLength - monthLength - firstDay; i++) {
 			days.push(i);
 		}
 
