@@ -3,30 +3,30 @@
 <head>
 	<meta charset="utf-8">
 	<script src="script/do.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="stylesheets/base.css" />
+    <link type="text/css" rel="stylesheet" href="stylesheets/layout.css" />
+    <link type="text/css" rel="stylesheet" href="stylesheets/skeleton.css" />
+    <link type="text/css" rel="stylesheet" href="stylesheets/dui.ical.css" />
 	<script type="text/javascript">
-		Do.add('base-css', {path: 'stylesheets/base.css', type: 'css'});
-		Do.add('layout-css', {path: 'stylesheets/layout.css', type: 'css'});
-		Do.add('skeleton-css', {path: 'stylesheets/skeleton.css', type: 'css'});
-		Do.add('dou-ical-css', {path: 'stylesheets/dou.ical.css', type: 'css'});
 		Do.add('tmpl', {path: 'script/jquery.tmpl.min.js', type: 'js'});
 		Do.add('date-format', {path: 'script/date.format.js', type: 'js'});
-		Do.add('dou-ical', {path: 'script/dou.ical.js', type: 'js', requires:['tmpl', 'date-format', 'base-css', 'layout-css', 'skeleton-css', 'dou-ical-css']});
+		Do.add('dui-ical', {path: 'script/dui.ical.js', type: 'js', requires:['tmpl', 'date-format']});
 	</script>
-	<title>dou.ical</title>
+	<title>dui.ical</title>
 </head>
 <body>
 
-	<script id="dou-ical-templ" type="text/x-jquery-tmpl">
-		<div class="dou-ical" id="{{= context}}">
-			<div class="dou-ical-hd">
-				<a href="#" class="dou-btn-prev">上月</a>
-				<a href="#" class="dou-btn-next">下月</a>
-				<div class="dou-ical-title">
+	<script id="dui-ical-templ" type="text/x-jquery-tmpl">
+		<div class="dui-ical" id="{{= context}}">
+			<div class="dui-ical-hd">
+				<a href="#" class="dui-btn-prev">上月</a>
+				<a href="#" class="dui-btn-next">下月</a>
+				<div class="dui-ical-title">
 					<span class="month">{{= month}}</span>
 					<span class="year">{{= year}}</span>
 				</div>
 			</div>
-			<div class="dou-ical-bd">
+			<div class="dui-ical-bd">
 				<table>
 					<thead>
 						<tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>
@@ -49,7 +49,7 @@
 
 	<div class="wrap column">
 
-		<h1>Dou.iCal</h1>
+		<h1>Dui.iCal</h1>
 
 		<div class="container">
 			<div class="intro">
@@ -67,13 +67,13 @@
 				<script type="text/javascript">
 					// 测试用户自定义函数
 					function test(){
-						$.each($('div#dou-ical-normal td'), function(i, v){
-							dou.log($(v).data('date'));
+						$.each($('div#dui-ical-normal td'), function(i, v){
+							dui.log($(v).data('date'));
 						});
 					}
 
-					Do('dou-ical', function(){
-							dou.ical.init({type: 'normal', ele: $('div.normal'), context: 'dou-ical-normal', callback: test});
+					Do('dui-ical', function(){
+							dui.ical.init({type: 'normal', ele: $('div.normal'), context: 'dui-ical-normal', callback: test});
 					});
 				</script>
 			</div>
@@ -83,9 +83,9 @@
 				<a class="icalPop"href="#">Click Me</a>
 			</div><!--calendar-->
 			<script type="text/javascript">
-				Do('dou-ical', function(){
+				Do('dui-ical', function(){
 					$('a.icalPop').bind('click', function(){
-						dou.ical.init({type: 'popup', ele: $(this), context: 'dou-ical-popup'})
+						dui.ical.init({type: 'popup', ele: $(this), context: 'dui-ical-popup'})
 						return false;
 					});
 				});
