@@ -1,0 +1,98 @@
+<!doctype>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="script/do.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="stylesheets/base.css" />
+    <link type="text/css" rel="stylesheet" href="stylesheets/layout.css" />
+    <link type="text/css" rel="stylesheet" href="stylesheets/skeleton.css" />
+    <link type="text/css" rel="stylesheet" href="stylesheets/dui.ical.css" />
+	<script type="text/javascript">
+		Do.add('tmpl', {path: 'script/jquery.tmpl.min.js', type: 'js'});
+		Do.add('date-format', {path: 'script/date.format.js', type: 'js'});
+		Do.add('dui-ical', {path: 'script/dui.ical.js', type: 'js', requires:['tmpl', 'date-format']});
+	</script>
+	<title>dui.ical</title>
+</head>
+<body>
+
+	<script id="dui-ical-templ" type="text/x-jquery-tmpl">
+		<div class="dui-ical" id="{{= context}}">
+			<div class="dui-ical-hd">
+				<a href="#" class="dui-btn-prev">上月</a>
+				<a href="#" class="dui-btn-next">下月</a>
+				<div class="dui-ical-title">
+					<span class="month">{{= month}}</span>
+					<span class="year">{{= year}}</span>
+				</div>
+			</div>
+			<div class="dui-ical-bd">
+				<table>
+					<thead>
+						<tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>
+					</thead>
+					<tbody>
+						<tr>
+						{{each(i, day) days}}
+							{{if (i + 1) % 7 === 0}}
+							<td>{{= day}}</td></tr><tr>
+							{{else}}
+							<td>{{= day}}</td>
+							{{/if}}
+						{{/each}}
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</script>
+
+	<div class="wrap column">
+
+		<h1>Dui.iCal</h1>
+
+		<div class="container">
+			<div class="intro">
+				<h4>简单的日历一枚</h4>
+				<h5>其中用到了：</h5>
+				<ul>
+					<li><a href="http://kejun.github.com/Do/">Do</a></li>
+					<li><a href="http://plugins.jquery.com/project/jquerytemplate">JQUERY TEMPLATES</a></li>
+					<li><a href="http://www.getskeleton.com/">Skeleton</a></li>
+				</ul>
+			</div>
+
+			<div class="ical normal columns five">
+				<h3>Demo 1</h3>
+				<script type="text/javascript">
+					// 测试用户自定义函数
+					function test(){
+						$.each($('div#dui-ical-normal td'), function(i, v){
+							dui.log($(v).data('date'));
+						});
+					}
+
+					Do('dui-ical', function(){
+							dui.ical.init({type: 'normal', ele: $('div.normal'), context: 'dui-ical-normal', callback: test});
+					});
+				</script>
+			</div>
+
+			<div class="ical popup columns five">
+				<h3>Demo 2</h3>
+				<a class="icalPop"href="#">Click Me</a>
+			</div><!--calendar-->
+			<script type="text/javascript">
+				Do('dui-ical', function(){
+					$('a.icalPop').bind('click', function(){
+						dui.ical.init({type: 'popup', ele: $(this), context: 'dui-ical-popup'})
+						return false;
+					});
+				});
+			</script>
+		</div>
+
+	</div>
+
+</body>
+</html>
