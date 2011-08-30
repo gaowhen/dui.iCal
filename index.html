@@ -1,77 +1,98 @@
-<!DOCTYPE html>
+<!doctype>
 <html>
 <head>
-  <meta charset='utf-8'>
-
-  <title>gaowhen/Dou.iCal @ GitHub</title>
-
-  <style type="text/css">
-    body {
-      margin-top: 1.0em;
-      background-color: #3ad45f;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
-      color: #ffffff;
-    }
-    #container {
-      margin: 0 auto;
-      width: 700px;
-    }
-    h1 { font-size: 3.8em; color: #c52ba0; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
-    h1 a { text-decoration: none }
-    h2 { font-size: 1.5em; color: #c52ba0; }
-    h3 { text-align: center; color: #c52ba0; }
-    a { color: #c52ba0; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
-    .download { float: right; }
-    pre { background: #000; color: #fff; padding: 15px;}
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-  </style>
+	<meta charset="utf-8">
+	<script src="script/do.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="stylesheets/base.css" />
+    <link type="text/css" rel="stylesheet" href="stylesheets/layout.css" />
+    <link type="text/css" rel="stylesheet" href="stylesheets/skeleton.css" />
+    <link type="text/css" rel="stylesheet" href="stylesheets/dui.ical.css" />
+	<script type="text/javascript">
+		Do.add('tmpl', {path: 'script/jquery.tmpl.min.js', type: 'js'});
+		Do.add('date-format', {path: 'script/date.format.js', type: 'js'});
+		Do.add('dui-ical', {path: 'script/dui.ical.js', type: 'js', requires:['tmpl', 'date-format']});
+	</script>
+	<title>dui.ical</title>
 </head>
-
 <body>
-  <a href="http://github.com/gaowhen/Dou.iCal"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
 
-  <div id="container">
+	<script id="dui-ical-templ" type="text/x-jquery-tmpl">
+		<div class="dui-ical" id="{{= context}}">
+			<div class="dui-ical-hd">
+				<a href="#" class="dui-btn-prev">上月</a>
+				<a href="#" class="dui-btn-next">下月</a>
+				<div class="dui-ical-title">
+					<span class="month">{{= month}}</span>
+					<span class="year">{{= year}}</span>
+				</div>
+			</div>
+			<div class="dui-ical-bd">
+				<table>
+					<thead>
+						<tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th></tr>
+					</thead>
+					<tbody>
+						<tr>
+						{{each(i, day) days}}
+							{{if (i + 1) % 7 === 0}}
+							<td>{{= day}}</td></tr><tr>
+							{{else}}
+							<td>{{= day}}</td>
+							{{/if}}
+						{{/each}}
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</script>
 
-    <div class="download">
-      <a href="http://github.com/gaowhen/Dou.iCal/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/gaowhen/Dou.iCal/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+	<div class="wrap column">
 
-    <h1><a href="http://github.com/gaowhen/Dou.iCal">Dou.iCal</a>
-      <span class="small">by <a href="http://github.com/gaowhen">gaowhen</a></span></h1>
+		<h1>Dui.iCal</h1>
 
-    <div class="description">
-      simple calendar 
-    </div>
+		<div class="container">
+			<div class="intro">
+				<h4>简单的日历一枚</h4>
+				<h5>其中用到了：</h5>
+				<ul>
+					<li><a href="http://kejun.github.com/Do/">Do</a></li>
+					<li><a href="http://plugins.jquery.com/project/jquerytemplate">JQUERY TEMPLATES</a></li>
+					<li><a href="http://www.getskeleton.com/">Skeleton</a></li>
+				</ul>
+			</div>
 
-    <h2>Authors</h2>
-<p>Miko Gao (gaowhen.com@gmail.com)<br/><br/>      </p>
-<h2>Contact</h2>
-<p>Miko Gao (gaowhen.com@gmail.com)<br/>      </p>
+			<div class="ical normal columns five">
+				<h3>Demo 1</h3>
+				<script type="text/javascript">
+					// 测试用户自定义函数
+					function test(){
+						$.each($('div#dui-ical-normal td'), function(i, v){
+							dui.log($(v).data('date'));
+						});
+					}
 
+					Do('dui-ical', function(){
+							dui.ical.init({type: 'normal', ele: $('div.normal'), context: 'dui-ical-normal', callback: test});
+					});
+				</script>
+			</div>
 
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/gaowhen/Dou.iCal/zipball/master">zip</a> or
-      <a href="http://github.com/gaowhen/Dou.iCal/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/gaowhen/Dou.iCal</pre>
-    </p>
+			<div class="ical popup columns five">
+				<h3>Demo 2</h3>
+				<a class="icalPop"href="#">Click Me</a>
+			</div><!--calendar-->
+			<script type="text/javascript">
+				Do('dui-ical', function(){
+					$('a.icalPop').bind('click', function(){
+						dui.ical.init({type: 'popup', ele: $(this), context: 'dui-ical-popup'})
+						return false;
+					});
+				});
+			</script>
+		</div>
 
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/gaowhen/Dou.iCal">gaowhen/Dou.iCal</a>
-    </div>
+	</div>
 
-  </div>
-
-  
 </body>
 </html>
