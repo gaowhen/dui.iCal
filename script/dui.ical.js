@@ -194,7 +194,7 @@
 
             $iCal.find('a.dui-btn-prev').data('date', prev);
             $iCal.find('a.dui-btn-next').data('date', next);
-            $iCal.find('div.dui-ical-title').data('date', now);
+            $iCal.find('div.dui-ical-title').data('date', opt.date);
             $iCal.find('div.dui-ical-hd a').anotherMonth(data);
 
             var _first = $.inArray(1, days),
@@ -203,14 +203,15 @@
             $.each($iCal.find('td'), function(i, v) {
                 var $this = $(this);
                 if (i < _first) {
-                    $this.data('date', year + '' + _zeroize(parseInt(month, 10) - 1) + '' + _zeroize($this.text()));
+                    var date = parseInt(month, 10) - 1 === 0? parseInt(year -1, 10) + '12' + _zeroize($this.text()): year + '' + _zeroize(parseInt(month, 10) - 1) + '' + _zeroize($this.text());
+                    $this.data('date', date);
                     $this.addClass('other-month');
                 } else if (i > _last) {
                     $this.data('date', year + '' + _zeroize(parseInt(month, 10) + 1) + '' + _zeroize($this.text()));
                     $this.addClass('other-month');
                 } else {
                     $this.data('date', year + '' + _zeroize(month) + '' + _zeroize($this.text()));
-                    if ($this.data('date') === now.replace(/-/g, '')) {
+                    if ($this.data('date') === opt.date.replace(/-/g, '')) {
                         $this.addClass('today');
                     }
                 }
